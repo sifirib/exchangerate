@@ -2,33 +2,38 @@ package com.profeed.exchangerate.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "exchange_rates")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Currency {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private boolean success;
+    private LocalDateTime date;
 
+    //hangi siteden gelecğei
     @Column(nullable = false)
-    private Long timestamp;
-
-    @Column(nullable = false)
-    private String base;
     private String source;
 
-    @Column(nullable = false)
-    private LocalDate date;
+    @Column(name = "sourceCurreny")
+    @Enumerated(EnumType.STRING)
+    private CurrencyEnum sourceCurrency;   //USD
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "currency_rates", joinColumns = @JoinColumn(name = "exchange_rate_id"))
-    @MapKeyColumn(name = "currency")
+    @Column(name = "targetCurrency")
+    @Enumerated(EnumType.STRING)
+    private CurrencyEnum targetCurrency;  //TL
+
     @Column(name = "rate")
-    private Map<String, Double> rates;
+    private Double rate;            //33
 }

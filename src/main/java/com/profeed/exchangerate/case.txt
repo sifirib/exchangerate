@@ -1,0 +1,12 @@
+Profeed Study Case
+
+OK 2 farklı apiden dolar ve euro kurlarının çekilmesi ve bu işlemin her saat çalışacak şekilde otomatize edilmesi;
+
+OK Bu verilerin kur kaynağı, kur tarih-saati, doviz tipi, alış fiyatı, satış fiyatı alanlarını içerecek şekilde modellenmesi;
+
+OK Veritabanına kaydedilmesi;
+
+Ve yazılacak api sayesinde kur kaynağı, kur tarih-saati, doviz tipi alanlarına göre
+filtrelenebilmesi gerekmektedir.
+
+(Herhangi bir frontend gerekli değil)

@@ -1,4 +1,8 @@
 package com.profeed.exchangerate.repository;
 
-public class ExchangeRateRepository {
+import com.profeed.exchangerate.model.Currency;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ExchangeRateRepository extends JpaRepository<Currency, Long> {
+
 }

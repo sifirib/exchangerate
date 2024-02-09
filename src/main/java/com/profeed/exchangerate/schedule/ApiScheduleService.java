@@ -1,32 +1,44 @@
 package com.profeed.exchangerate.schedule;
 
-import com.profeed.exchangerate.model.CurrencylayerCurrency;
-import com.profeed.exchangerate.model.FixerCurrency;
-import com.profeed.exchangerate.service.CurrencylayerApiServiceImpl;
-import com.profeed.exchangerate.service.FixerApiServiceImpl;
+import com.profeed.exchangerate.model.Currency;
+import com.profeed.exchangerate.repository.ExchangeRateRepository;
+import com.profeed.exchangerate.service.currency.CurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 @Slf4j // log info
 @EnableScheduling
 @Component
 public class ApiScheduleService {
+    private CurrencyService fixerApiServiceImpl;
+
+    private CurrencyService currencylayerApiServiceImpl;
+
+    private ExchangeRateRepository exchangeRateRepository;
 
     @Autowired
-    private FixerApiServiceImpl fixerApiService;
+    public ApiScheduleService(
+            @Qualifier("fixerApiServiceImpl") CurrencyService fixerApiServiceImpl,
+            @Qualifier("currencylayerApiServiceImpl") CurrencyService currencylayerApiServiceImpl,
+            ExchangeRateRepository exchangeRateRepository) {
+        this.fixerApiServiceImpl = fixerApiServiceImpl;
+        this.currencylayerApiServiceImpl = currencylayerApiServiceImpl;
+        this.exchangeRateRepository = exchangeRateRepository;
+    }
 
-    @Autowired
-    private CurrencylayerApiServiceImpl currencylayerApiService;
-
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedRate=60*60*1000)
     public void updateEuroAndDollarRates() {
-        FixerCurrency euro = fixerApiService.getEuro();
-        CurrencylayerCurrency dollar = currencylayerApiService.getDollar();
+        Currency eur = fixerApiServiceImpl.getExchangeRate("EUR", "TRY");
+        Currency usd = currencylayerApiServiceImpl.getExchangeRate("USD", "TRY");
+        updateDatabase(eur, usd);
+    }
 
-        log.info(euro.getRates().toString());
-        log.info(dollar.getQuotes().toString());
-
+    public void updateDatabase(Currency eur, Currency usd) {
+        exchangeRateRepository.save(eur);
+        exchangeRateRepository.save(usd);
     }
 }
