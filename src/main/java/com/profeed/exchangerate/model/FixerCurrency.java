@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "exchange_rates")
-public class Currency {
+public class FixerCurrency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,6 @@ public class Currency {
 
     @Column(nullable = false)
     private String base;
-    private String source;
 
     @Column(nullable = false)
     private LocalDate date;

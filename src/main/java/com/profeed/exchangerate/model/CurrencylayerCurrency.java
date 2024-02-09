@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "exchange_rates")
-public class Currency {
+public class CurrencylayerCurrency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,6 @@ public class Currency {
     private Long timestamp;
 
     @Column(nullable = false)
-    private String base;
     private String source;
 
     @Column(nullable = false)
@@ -30,5 +29,5 @@ public class Currency {
     @CollectionTable(name = "currency_rates", joinColumns = @JoinColumn(name = "exchange_rate_id"))
     @MapKeyColumn(name = "currency")
     @Column(name = "rate")
-    private Map<String, Double> rates;
+    private Map<String, Double> quotes;
 }

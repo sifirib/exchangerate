@@ -1,7 +1,7 @@
 package com.profeed.exchangerate.service;
 
-import com.profeed.exchangerate.model.Currency;
+import com.profeed.exchangerate.model.FixerCurrency;
 
 public interface FixerApiService {
-    public Currency getEuro();
+    public FixerCurrency getEuro();
 }
