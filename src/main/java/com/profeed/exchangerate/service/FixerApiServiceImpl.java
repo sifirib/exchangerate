@@ -17,14 +17,14 @@ import java.util.List;
 @Service
 public class FixerApiServiceImpl implements CurrencyService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    private HttpHeaders httpHeaders;
+    private final HttpHeaders httpHeaders;
+
+    private final ExchangeRateRepository exchangeRateRepository;
 
     @Value("${api.fixer.euro_api}")
     private String fixerApi;
-
-    private ExchangeRateRepository exchangeRateRepository;
 
     @Autowired
     public FixerApiServiceImpl(RestTemplate restTemplate, HttpHeaders httpHeaders, ExchangeRateRepository exchangeRateRepository) {
@@ -42,8 +42,8 @@ public class FixerApiServiceImpl implements CurrencyService {
         FixerCurrencyDto fixerCurrencyDto = response.getBody();
         Currency currency = Currency.builder()
                 .date(LocalDateTime.now())
-                .source("fixer")
-                .sourceCurrency(CurrencyEnum.USD)
+                .source("Fixer")
+                .sourceCurrency(CurrencyEnum.EUR)
                 .targetCurrency(CurrencyEnum.TRY)
                 .rate(fixerCurrencyDto.getRates().getTRY())
                 .build();

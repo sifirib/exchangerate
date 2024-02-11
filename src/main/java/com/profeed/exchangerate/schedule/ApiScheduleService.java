@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 @Component
 public class ApiScheduleService {
-    private CurrencyService fixerApiServiceImpl;
+    private final CurrencyService fixerApiServiceImpl;
 
-    private CurrencyService currencylayerApiServiceImpl;
+    private final CurrencyService currencylayerApiServiceImpl;
 
-    private ExchangeRateRepository exchangeRateRepository;
+    private final ExchangeRateRepository exchangeRateRepository;
 
     @Autowired
     public ApiScheduleService(

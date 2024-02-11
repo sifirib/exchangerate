@@ -5,7 +5,6 @@ import com.profeed.exchangerate.model.CurrencyEnum;
 import com.profeed.exchangerate.repository.ExchangeRateRepository;
 import com.profeed.exchangerate.service.currency.CurrencyService;
 import com.profeed.exchangerate.service.dto.currenylayer.CurrencylayerDto;
-import com.profeed.exchangerate.service.dto.fixer.FixerCurrencyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -18,14 +17,15 @@ import java.util.List;
 @Service
 public class CurrencylayerApiServiceImpl implements CurrencyService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    private HttpHeaders httpHeaders;
+    private final HttpHeaders httpHeaders;
+
+    private final ExchangeRateRepository exchangeRateRepository;
+
 
     @Value("${api.currencylayer.dollar_api}")
     private String currencylayerApi;
-
-    private ExchangeRateRepository exchangeRateRepository;
 
     @Autowired
     public CurrencylayerApiServiceImpl(RestTemplate restTemplate, HttpHeaders httpHeaders, ExchangeRateRepository exchangeRateRepository) {

@@ -10,3 +10,9 @@ Ve yazılacak api sayesinde kur kaynağı, kur tarih-saati, doviz tipi alanları
 filtrelenebilmesi gerekmektedir.
 
 (Herhangi bir frontend gerekli değil)
+
+
+
+dependency injection (constructor injection)
+dto (data transfer object)
+mapper (converting an object to another)

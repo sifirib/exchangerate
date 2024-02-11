@@ -1,6 +1,5 @@
 package com.profeed.exchangerate.web.dto.response;
 
-import com.profeed.exchangerate.service.dto.fixer.Rates;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
