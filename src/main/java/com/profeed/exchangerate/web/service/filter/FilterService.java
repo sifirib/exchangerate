@@ -1,6 +1,5 @@
 package com.profeed.exchangerate.web.service.filter;
 
-import com.profeed.exchangerate.model.Currency;
 import com.profeed.exchangerate.model.CurrencyEnum;
 import com.profeed.exchangerate.web.dto.response.CurrencyDto;
 

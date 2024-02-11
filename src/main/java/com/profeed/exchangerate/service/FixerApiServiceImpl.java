@@ -47,7 +47,6 @@ public class FixerApiServiceImpl implements CurrencyService {
                 .targetCurrency(CurrencyEnum.TRY)
                 .rate(fixerCurrencyDto.getRates().getTRY())
                 .build();
-        Currency savedCurrency = exchangeRateRepository.save(currency);
-        return savedCurrency;
+        return exchangeRateRepository.save(currency);
     }
 }
