@@ -8,6 +8,7 @@ import com.profeed.exchangerate.web.dto.response.CurrencyDto;
 import com.profeed.exchangerate.web.service.filter.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -56,6 +57,20 @@ public class ExchangeRateServiceImpl implements ExchangeRateService, FilterServi
     }
 
     @Override
+    public List<CurrencyDto> filterByDateBefore(LocalDateTime date) {
+        List<Currency> exchangeRates = exchangeRateRepository.findByDateBefore(date);
+
+        return currencyToDto(exchangeRates);
+    }
+
+    @Override
+    public List<CurrencyDto> filterByDateAfter(LocalDateTime date) {
+        List<Currency> exchangeRates = exchangeRateRepository.findByDateAfter(date);
+
+        return currencyToDto(exchangeRates);
+    }
+
+    @Override
     public List<CurrencyDto> filterBySourceCurrency(CurrencyEnum sourceCurrency) {
         List<Currency> exchangeRates = exchangeRateRepository.findBySourceCurrency(sourceCurrency);
 
@@ -75,6 +90,21 @@ public class ExchangeRateServiceImpl implements ExchangeRateService, FilterServi
 
         return currencyToDto(exchangeRates);
     }
+
+    @Override
+    public List<CurrencyDto> filterByRateGreaterThanEqual(Double rate) {
+        List<Currency> exchangeRates = exchangeRateRepository.findByRateGreaterThanEqual(rate);
+
+        return currencyToDto(exchangeRates);
+    }
+
+    @Override
+    public List<CurrencyDto> filterByRateLessThanEqual(Double rate) {
+        List<Currency> exchangeRates = exchangeRateRepository.findByRateLessThanEqual(rate);
+
+        return currencyToDto(exchangeRates);
+    }
+
 
 
 }

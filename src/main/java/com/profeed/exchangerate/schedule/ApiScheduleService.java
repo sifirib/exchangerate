@@ -30,7 +30,7 @@ public class ApiScheduleService {
         this.exchangeRateRepository = exchangeRateRepository;
     }
 
-    @Scheduled(fixedRate=60*60*1000)
+    @Scheduled(fixedRate=60*60*1000) // 1 hour
     public void updateEuroAndDollarRates() {
         Currency eur = fixerApiServiceImpl.getExchangeRate("EUR", "TRY");
         Currency usd = currencylayerApiServiceImpl.getExchangeRate("USD", "TRY");
